@@ -18,4 +18,4 @@
 
 |주차|문제 1|문제 2|문제 3|
 |---|------------|------------|------------|
-|1주차|[BOJ 10871번 - X보다 작은 수](https://www.acmicpc.net/problem/10871)|X|X|
+|1주차|[BOJ 10871번 - X보다 작은 수](https://www.acmicpc.net/problem/10871)|[BOJ 10808번 - 알파벳 개수](https://www.acmicpc.net/problem/10808)|X|
