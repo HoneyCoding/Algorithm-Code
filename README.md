@@ -16,6 +16,6 @@
 
 ## 문제 목록
 
-|주차|문제 1|문제 2|문제 3|
-|---|------------|------------|------------|
-|1주차|[BOJ 10871번 - X보다 작은 수](https://www.acmicpc.net/problem/10871)|[BOJ 10808번 - 알파벳 개수](https://www.acmicpc.net/problem/10808)|[BOJ 1475번 - 방 번호](https://www.acmicpc.net/problem/1475)|
+|주차|문제 1|문제 2|문제 3|문제 4|
+|---|------------|------------|------------|------------|
+|1주차|[BOJ 10871번 - X보다 작은 수](https://www.acmicpc.net/problem/10871)|[BOJ 10808번 - 알파벳 개수](https://www.acmicpc.net/problem/10808)|[BOJ 1475번 - 방 번호](https://www.acmicpc.net/problem/1475)|[BOJ 3273번 - 두 수의 합](https://www.acmicpc.net/problem/3273)|
