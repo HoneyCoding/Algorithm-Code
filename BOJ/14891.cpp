@@ -35,73 +35,22 @@ int main(void)
         for (int j = 0; j < 4; j++)
             current_top_indexes[j] = next_top_indexes[j];
 
-        if (spin_direction == 1) // 시계 방향 회전
+        int spin_value = spin_direction == 1 ? 7 : 1;
+        next_top_indexes[gear_num] = (current_top_indexes[gear_num] + spin_value) % 8;
+        for (int j = 1; j < 4; j++)
         {
-            next_top_indexes[gear_num] = (current_top_indexes[gear_num] + 7) % 8;
+            // 우측 톱니바퀴
             if (
-                gear_num + 1 < 4 &&
-                next_top_indexes[gear_num] != current_top_indexes[gear_num] &&
-                gears[(current_top_indexes[gear_num] + 2) % 8][gear_num] != gears[(current_top_indexes[gear_num + 1] + 6) % 8][gear_num + 1])
-                next_top_indexes[gear_num + 1] = (current_top_indexes[gear_num + 1] + 1) % 8;
+                gear_num + j < 4 &&
+                next_top_indexes[gear_num + (j - 1)] != current_top_indexes[gear_num + (j - 1)] &&
+                gears[(current_top_indexes[gear_num + (j - 1)] + 2) % 8][gear_num + (j - 1)] != gears[(current_top_indexes[gear_num + j] + 6) % 8][gear_num + j])
+                next_top_indexes[gear_num + j] = (current_top_indexes[gear_num + j] + (j % 2 == 0 ? spin_value : (8 - spin_value))) % 8;
+            // 좌측 톱니바퀴
             if (
-                gear_num + 2 < 4 &&
-                next_top_indexes[gear_num + 1] != current_top_indexes[gear_num + 1] &&
-                gears[(current_top_indexes[gear_num + 1] + 2) % 8][gear_num + 1] != gears[(current_top_indexes[gear_num + 2] + 6) % 8][gear_num + 2])
-                next_top_indexes[gear_num + 2] = (current_top_indexes[gear_num + 2] + 7) % 8;
-            if (
-                gear_num + 3 < 4 &&
-                next_top_indexes[gear_num + 2] != current_top_indexes[gear_num + 2] &&
-                gears[(current_top_indexes[gear_num + 2] + 2) % 8][gear_num + 2] != gears[(current_top_indexes[gear_num + 3] + 6) % 8][gear_num + 3])
-                next_top_indexes[gear_num + 3] = (current_top_indexes[gear_num + 3] + 1) % 8;
-            if (
-                gear_num - 1 >= 0 &&
-                next_top_indexes[gear_num] != current_top_indexes[gear_num] &&
-                gears[(current_top_indexes[gear_num] + 6) % 8][gear_num] != gears[(current_top_indexes[gear_num - 1] + 2) % 8][gear_num - 1])
-                next_top_indexes[gear_num - 1] = (current_top_indexes[gear_num - 1] + 1) % 8;
-            if (
-                gear_num - 2 >= 0 &&
-                next_top_indexes[gear_num - 1] != current_top_indexes[gear_num - 1] &&
-                gears[(current_top_indexes[gear_num - 1] + 6) % 8][gear_num - 1] != gears[(current_top_indexes[gear_num - 2] + 2) % 8][gear_num - 2])
-                next_top_indexes[gear_num - 2] = (current_top_indexes[gear_num - 2] + 7) % 8;
-            if (
-                gear_num - 3 >= 0 &&
-                next_top_indexes[gear_num - 2] != current_top_indexes[gear_num - 2] &&
-                gears[(current_top_indexes[gear_num - 2] + 6) % 8][gear_num - 2] != gears[(current_top_indexes[gear_num - 3] + 2) % 8][gear_num - 3])
-                next_top_indexes[gear_num - 3] = (current_top_indexes[gear_num - 3] + 1) % 8;
-        }
-        else if (spin_direction == -1) // 반시계 방향 회전
-        {
-            next_top_indexes[gear_num] = (current_top_indexes[gear_num] + 1) % 8;
-            if (
-                gear_num + 1 < 4 &&
-                next_top_indexes[gear_num] != current_top_indexes[gear_num] &&
-                gears[(current_top_indexes[gear_num] + 2) % 8][gear_num] != gears[(current_top_indexes[gear_num + 1] + 6) % 8][gear_num + 1])
-                next_top_indexes[gear_num + 1] = (current_top_indexes[gear_num + 1] + 7) % 8;
-            if (
-                gear_num + 2 < 4 &&
-                next_top_indexes[gear_num + 1] != current_top_indexes[gear_num + 1] &&
-                gears[(current_top_indexes[gear_num + 1] + 2) % 8][gear_num + 1] != gears[(current_top_indexes[gear_num + 2] + 6) % 8][gear_num + 2])
-                next_top_indexes[gear_num + 2] = (current_top_indexes[gear_num + 2] + 1) % 8;
-            if (
-                gear_num + 3 < 4 &&
-                next_top_indexes[gear_num + 2] != current_top_indexes[gear_num + 2] &&
-                gears[(current_top_indexes[gear_num + 2] + 2) % 8][gear_num + 2] != gears[(current_top_indexes[gear_num + 3] + 6) % 8][gear_num + 3])
-                next_top_indexes[gear_num + 3] = (current_top_indexes[gear_num + 3] + 7) % 8;
-            if (
-                gear_num - 1 >= 0 &&
-                next_top_indexes[gear_num] != current_top_indexes[gear_num] &&
-                gears[(current_top_indexes[gear_num] + 6) % 8][gear_num] != gears[(current_top_indexes[gear_num - 1] + 2) % 8][gear_num - 1])
-                next_top_indexes[gear_num - 1] = (current_top_indexes[gear_num - 1] + 7) % 8;
-            if (
-                gear_num - 2 >= 0 &&
-                next_top_indexes[gear_num - 1] != current_top_indexes[gear_num - 1] &&
-                gears[(current_top_indexes[gear_num - 1] + 6) % 8][gear_num - 1] != gears[(current_top_indexes[gear_num - 2] + 2) % 8][gear_num - 2])
-                next_top_indexes[gear_num - 2] = (current_top_indexes[gear_num - 2] + 1) % 8;
-            if (
-                gear_num - 3 >= 0 &&
-                next_top_indexes[gear_num - 2] != current_top_indexes[gear_num - 2] &&
-                gears[(current_top_indexes[gear_num - 2] + 6) % 8][gear_num - 2] != gears[(current_top_indexes[gear_num - 3] + 2) % 8][gear_num - 3])
-                next_top_indexes[gear_num - 3] = (current_top_indexes[gear_num - 3] + 7) % 8;
+                gear_num - j >= 0 &&
+                next_top_indexes[gear_num + (-j + 1)] != current_top_indexes[gear_num + (-j + 1)] &&
+                gears[(current_top_indexes[gear_num + (-j + 1)] + 6) % 8][gear_num + (-j + 1)] != gears[(current_top_indexes[gear_num - j] + 2) % 8][gear_num - j])
+                next_top_indexes[gear_num - j] = (current_top_indexes[gear_num - j] + (j % 2 == 0 ? spin_value : (8 - spin_value))) % 8;
         }
     }
 
